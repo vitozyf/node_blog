@@ -26,7 +26,7 @@ app.use(session({
     secret: "加密字符串*&^%$#@!",
     resave: false,
     saveUninitialized: false,
-    cooike: { maxAge: 5 * 1000 }
+    cooike: { maxAge: 10 * 1000 }
 }));
 
 //注册路由

@@ -57,8 +57,9 @@ module.exports = {
             //登陆成功之前，将用户信息和登陆状态保存到session中
             req.session.userInfo = result[0];
             req.session.islogin = true;
-
-            // console.log(req.session);
+            //配置cookie的失效时间，当前时间后多少毫秒失效
+            req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000; //一周
+            console.log(req.session);
 
             res.json({ err_code: 0, msg: "登陆成功" });
         });
