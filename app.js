@@ -9,7 +9,8 @@ const path = require("path");
 var app = express();
 
 //静态资源托管
-app.use("/node_modules", express.static("./node_modules"))
+app.use("/node_modules", express.static("./node_modules"));
+app.use("/static", express.static("./static"));
 
 //设置默认字符串模板
 app.set("view engine", "ejs");
@@ -30,11 +31,6 @@ app.use(session({
 }));
 
 //注册路由
-// var indexRouter = require("./routers/indexRouter.js")
-// app.use(indexRouter);
-// var userRouter = require("./routers/userRouter");
-// app.use(userRouter);
-//优化 不用分开注册每个路由
 var fileNames = fs.readdir(path.join(__dirname + "/routers"), (err, fileNames) => {
     if (err) throw err;
     fileNames.forEach(fileName => {
@@ -43,6 +39,6 @@ var fileNames = fs.readdir(path.join(__dirname + "/routers"), (err, fileNames) =
 })
 
 
-app.listen(3003, () => {
-    console.log("server runing at http://127.0.0.1:3003");
+app.listen(3004, () => {
+    console.log("server runing at http://127.0.0.1:3004");
 })

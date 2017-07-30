@@ -1,0 +1,64 @@
+<%- include("../common/header.ejs") %>
+    <!--<link rel="stylesheet" type="text/css" href="/node_modules/mditor/dist/css/mditor.min.css">
+    <script src="/node_modules/mditor/dist/js/mditor.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="/node_modules/mditor/dist/css/mditor.min.css" />
+    <script type="text/javascript" src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+
+    <div class="container-fluid">
+        <h3 class="text-center">发表新文章</h3>
+        <hr>
+
+        <form id="form">
+
+            <div class="form-group">
+                <label for="">文章标题：</label>
+                <input type="text" name="title" id="title" class="form-control" required maxlength="30">
+            </div>
+
+            <div class="form-group">
+                <label for="">文章内容：</label>
+                <!--mditor  -->
+                <textarea name="content" id="editor" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group clearfix">
+                <% if(islogin){ %>
+                    <input type="submit" value="发表文章" class="btn btn-primary pull-right">
+                    <% } %>
+
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+            //获取或设置编辑器的值
+            // mditor.on('ready', function() {
+            //     console.log(mditor.value);
+            //     mditor.value = '** hello **';
+            // });
+            $("#form").on("submit", function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "/article/add",
+                    data: {
+                        title: $("#title").val(),
+                        content: mditor.value,
+                        authorId: "<% if(islogin){ %><%= userInfo.id %><% }else{ %>0<% } %>"
+                    },
+                    type: "post",
+                    dataType: "json"
+                }).then(function(res) {
+                    console.log(res);
+
+                    location.href = "/";
+                })
+            })
+
+        })
+    </script>
+
+
+
+    <%- include("../common/footer.ejs") %>

@@ -1,0 +1,21 @@
+// 头部
+.nav {
+    .nav-top {
+        padding: 0 50px;
+        margin-bottom: 0;
+        .welcome {
+            font-size: 14px;
+            padding-right: 50px;
+        }
+        // 搜索图标
+        .search {
+            position: relative;
+            i {
+                position: absolute;
+                font-size: 20px;
+                top: 8px;
+                right: 8px;
+            }
+        }
+    }
+}

@@ -59,7 +59,7 @@ module.exports = {
             req.session.islogin = true;
             //配置cookie的失效时间，当前时间后多少毫秒失效
             req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000; //一周
-            console.log(req.session);
+            // console.log(req.session);
 
             res.json({ err_code: 0, msg: "登陆成功" });
         });
