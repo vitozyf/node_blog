@@ -10,6 +10,7 @@
 
 .nav .nav-top .search {
   position: relative;
+  cursor: pointer;
 }
 
 .nav .nav-top .search i {

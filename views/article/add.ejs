@@ -5,7 +5,7 @@
     <script type="text/javascript" src="/node_modules/mditor/dist/js/mditor.min.js"></script>
 
     <div class="container-fluid">
-        <h3 class="text-center">发表新文章</h3>
+        <h3>发表新文章</h3>
         <hr>
 
         <form id="form">
@@ -39,7 +39,6 @@
             // });
             $("#form").on("submit", function(e) {
                 e.preventDefault();
-
                 $.ajax({
                     url: "/article/add",
                     data: {
@@ -51,7 +50,6 @@
                     dataType: "json"
                 }).then(function(res) {
                     console.log(res);
-
                     location.href = "/";
                 })
             })

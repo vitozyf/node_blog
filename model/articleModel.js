@@ -12,14 +12,13 @@ module.exports = {
     },
     // 首页根据参数 获取页码部分文章信息
     getAllArticle(nowPage, pageSize, callback) {
-        // var sqlStr = "SELECT articles.* , usersinfo.nickname FROM articles LEFT JOIN usersinfo ON articles.authorId=usersinfo.id ORDER BY ctime DESC LIMIT 5 , 5 ; select count(*) AS totalCount from articles;";
-        var sqlStr = "SELECT articles.* , usersinfo.nickname FROM articles LEFT JOIN usersinfo ON articles.authorId=usersinfo.id ORDER BY ctime DESC LIMIT 5 , 5";
-        // var sqlStr = "select count(*) AS totalCount from articles";
-        connection.query(sqlStr, (err, result) => {
-            // if (err) return callback(err);
-            console.log(err);
-            console.log(result);
-            // callback(null, result);
+        // 执行多条语句前记得配置mysql中间件
+        var sqlStr = "SELECT articles.* , usersinfo.nickname FROM articles LEFT JOIN usersinfo ON articles.authorId=usersinfo.id ORDER BY ctime DESC LIMIT ? , ? ; select count(*) AS totalCount from articles;";
+        var offset = (nowPage - 1) * pageSize;
+        connection.query(sqlStr, [offset, pageSize], (err, result) => {
+            if (err) return callback(err);
+            // console.log(result);
+            callback(null, result);
         })
     },
     //根据id获取文章详情
